@@ -1,27 +1,2 @@
-(function() {
-    // Свой ключ: сайты на monteton.github.io делят localStorage, срок «Питания» сюда не переносится
-
-    // Получаем дату первого входа (в миллисекундах)
-    var firstAccess = localStorage.getItem('startpit-first-access');
-    var now = new Date().getTime();
-    
-    // Количество дней для доступа
-    var maxDays = 60;
-    
-    if (!firstAccess) {
-        // Если пользователь зашел впервые, сохраняем текущую дату
-        localStorage.setItem('startpit-first-access', now.toString());
-    } else {
-        // Считаем, сколько дней прошло с первого захода
-        var diffTime = now - parseInt(firstAccess, 10);
-        var daysPassed = diffTime / (1000 * 60 * 60 * 24);
-        
-        if (daysPassed > maxDays) {
-            // Если прошло больше 60 дней, перенаправляем на страницу блокировки
-            // Проверяем, что мы уже не на ней, чтобы не было бесконечного цикла
-            if (!window.location.pathname.endsWith('expired.html')) {
-                window.location.href = 'expired.html';
-            }
-        }
-    }
-})();
+// Доступ без ограничения по сроку: эта версия открывается как мини-приложение в Телеграм-боте,
+// доступом управляет бот. Срок 180 дней — только в PWA-версии (monteton/startpit_pwa, собирается make_pwa.py).
