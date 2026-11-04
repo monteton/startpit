@@ -1,6 +1,8 @@
 (function() {
+    // Свой ключ: сайты на monteton.github.io делят localStorage, срок «Питания» сюда не переносится
+
     // Получаем дату первого входа (в миллисекундах)
-    var firstAccess = localStorage.getItem('app_first_access_date');
+    var firstAccess = localStorage.getItem('startpit-first-access');
     var now = new Date().getTime();
     
     // Количество дней для доступа
@@ -8,7 +10,7 @@
     
     if (!firstAccess) {
         // Если пользователь зашел впервые, сохраняем текущую дату
-        localStorage.setItem('app_first_access_date', now.toString());
+        localStorage.setItem('startpit-first-access', now.toString());
     } else {
         // Считаем, сколько дней прошло с первого захода
         var diffTime = now - parseInt(firstAccess, 10);
